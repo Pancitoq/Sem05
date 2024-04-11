@@ -16,13 +16,13 @@ services:
       - MYSQL_PORT=$MYSQL_PORT
       - MYSQL_DB=$MYSQL_DB
     ports:
-      - "3000:8080"
+      - "13500:8080"
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
     networks:
       - app-networkrmelendez
-    command: ./wait-for.sh db:3306 -- /home/node/app/node_modules/.bin/nodemon app.js
+    command: ./wait-for db:13500 -- /home/node/app/node_modules/.bin/nodemon app.js
 
   db:
     image: mysql:latest
@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_DATABASE=$MYSQL_DB
     volumes:     
       - dbdatarmelendez:/var/lib/mysql
@@ -43,4 +43,4 @@ networks:
 
 volumes:
   dbdatarmelendez:
-  node_modules: 
+  node_modules:
