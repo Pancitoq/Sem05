@@ -24,9 +24,9 @@ services:
       - app-networkrmelendez
     command: ./wait-for db:13500 -- /home/node/app/node_modules/.bin/nodemon app.js
 
-  db_nuevo:
+  db:
     image: mysql:latest
-    container_name: db
+    container_name: dbmelendez
     restart: unless-stopped
     env_file: .env
     environment:
